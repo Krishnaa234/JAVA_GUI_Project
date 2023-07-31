@@ -82,7 +82,10 @@ public class Login extends JFrame implements ActionListener {
             
         }
         else if(ae.getSource() == signup) {
-            
+            setVisible(false);
+            //now open the sigup frame and close the login frame
+            //create object of sigup class and it will be called by constructor after pbject formation
+            new SignupOne().setVisible(true);
         }
     }
     
