@@ -232,6 +232,10 @@ public class SignupOne extends JFrame implements ActionListener{
                 String query = "insert into signup values('"+formno+"', '"+name+"', '"+fname+"', '"+dob+"', '"+gender+"', '"+email+"', '"+marital+"', '"+address+"', '"+city+"', '"+pin+"', '"+state+"')";
                 //queru command "insert into table_row_name values(nin + mmo + ....);
                 c.s.executeUpdate(query); //runs query on mysql
+                
+                setVisible(false);
+                new SignupTwo(formno).setVisible(true); //created SignupTwo class object and visibility true with formnpo variable
+                //using formno as the primary key to corelate signupone and signuptwo
             }
         } catch(Exception e) {
             System.out.println(e);

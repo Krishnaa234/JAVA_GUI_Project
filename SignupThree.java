@@ -61,7 +61,6 @@ public class SignupThree extends JFrame implements ActionListener{
         card.setBounds(100, 300, 200, 30);
         add(card);
         
-        
         JLabel number = new JLabel("xxxx-xxxx-xxxx-xx67");
         number.setFont(new Font("Railway", Font.BOLD, 22));
         number.setBounds(330, 300, 250, 30);
@@ -205,14 +204,16 @@ public class SignupThree extends JFrame implements ActionListener{
                     
                     JOptionPane.showMessageDialog(null, "Card Number " + cardnumber + "\nPin: "+ pinnumber);
                     
+                    setVisible(false);
+                    new Deposit(pinnumber).setVisible(false);
                 }
-        
             } catch (Exception e) {
                 System.out.println(e);
             }
             
         } else if(ae.getSource() == cancel) {
-            
+            setVisible(false);
+            new Login().setVisible(true);
         }
     }
     

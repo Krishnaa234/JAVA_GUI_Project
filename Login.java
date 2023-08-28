@@ -2,6 +2,8 @@ package bank.management.system;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
+
 public class Login extends JFrame implements ActionListener {
     
     JButton login, signup, clear;
@@ -79,12 +81,27 @@ public class Login extends JFrame implements ActionListener {
             pintext.setText("");
         }
         else if(ae.getSource() == login) {
-            
+            Conn conn = new Conn();//establish conn between database
+            String cardnumber = cardtext.getText();
+            String pinnumber = pintext.getText(); //pin number is not a text field but a password field
+            String query = "select * from login where cardnumber = '"+cardnumber+"' and pin = '"+pinnumber+"'";//DML Data Manupulation query now we'll set the text for database
+            try{
+                ResultSet rs = conn.s.executeQuery(query); //taking the value if present then in rs
+                if(rs.next()) {
+                    setVisible(false);
+                    new Transaction(pinnumber).setVisible(true); //sending pin value in transaction constructor
+                } else{
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number or PIN");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        
         }
         else if(ae.getSource() == signup) {
             setVisible(false);
             //now open the sigup frame and close the login frame
-            //create object of sigup class and it will be called by constructor after pbject formation
+            //create object of sigup class and it will be called by constructor after object formation
             new SignupOne().setVisible(true);
         }
     }
